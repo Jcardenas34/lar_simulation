@@ -1,65 +1,22 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
 
 [project]
-name = "-"
-dynamic = ["version"]
-description = '"A directory that contains code to simulate liquid and solid Argon"'
-readme = "README.md"
-requires-python = ">=3.8"
-license = "MIT"
-keywords = []
+name = "lar_simulation"
+version = "0.1.0"
+description = "A project that will simulate solid and liquid argon"
 authors = [
-  { name = "Juan Cardenas", email = "cardenas.juan93@yahoo.com" },
+  { name = "Juan Cardenas", email = "cardenas.juan5453@gmail.com" }
 ]
-classifiers = [
-  "Development Status :: 4 - Beta",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
-]
-dependencies = []
+requires-python = ">=3.8"
 
-[project.urls]
-Documentation = "https://github.com/Juan Cardenas/-#readme"
-Issues = "https://github.com/Juan Cardenas/-/issues"
-Source = "https://github.com/Juan Cardenas/-"
+[tool.setuptools]
+package-dir = {"" = "src"}
 
-[tool.hatch.version]
-path = "src/_/__about__.py"
+[tool.setuptools.packages.find]
+where = ["src"]
 
-[tool.hatch.envs.types]
-extra-dependencies = [
-  "mypy>=1.0.0",
-]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/_ tests}"
 
-[tool.coverage.run]
-source_pkgs = ["_", "tests"]
-branch = true
-parallel = true
-omit = [
-  "src/_/__about__.py",
-]
-
-[tool.coverage.paths]
-_ = ["src/_", "*/-/src/_"]
-tests = ["tests", "*/-/tests"]
-
-[tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
-[tool.pytest.ini_options]
-pythonpath = [
-  ".", "src",
-]
+[project.scripts]
+run-something = "lar_simulation.starting_banner:main"

@@ -1,0 +1,2 @@
+[console_scripts]
+run-something = lar_simulation.starting_banner:main

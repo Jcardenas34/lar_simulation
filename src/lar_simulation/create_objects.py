@@ -16,13 +16,11 @@ import random as rnd
 import matplotlib.pyplot as plt
 import os
 from subprocess import *                  # shell/command line module; Unix only
-import sys
-import imageio
-import argparse
 
 from typing import *
-
-
+import sys
+import queue 
+import threading
 
 # def nbody(id, position, velocities, time_step:float, box_length: float) -> np.ndarray :                     # N-body MD
 #     '''
@@ -233,6 +231,8 @@ def generate_solid_camera(dimension:int, lattice_spacing:float, box_len:float) -
                     box_center_coordinate), 
         length=box_len, height=box_len, width=box_len, 
         opacity=0.3)
+    
+    return scene0
 
 def generate_liquid_camera(box_len:float) -> None:
     '''
@@ -252,7 +252,8 @@ def generate_liquid_camera(box_len:float) -> None:
                     half_box_len), 
         length=box_len, height=box_len, width=box_len, 
         opacity=0.3)
-
+    
+    return scene
 
 def potential(atoms):
     V0 = 0.01       # eV
@@ -265,9 +266,20 @@ def potential(atoms):
              
                 
 
+stop_event = threading.Event()  # module-level global
 
+def early_stop():
+    '''
+    Function that is meant to constantly monitor for input
+    to stop simulation while loop
+    '''
+    while True:
+        user_input = input("Type 'q', 'quit', or 'exit' for early stopping:  ")
+        if user_input.lower() in ['quit', 'q', 'exit']:
+            stop_event.set()
+            break
 
-def begin_simulation(runtime:float, positions:list, atoms_container:list, box_len:float, dt:float = 0.001 ) -> None:
+def begin_simulation(runtime:float, positions:list, atoms_container:list, box_len:float, scene , dt:float = 0.001 ) -> None:
     '''
     Run the simulation for a given period of time "runtime"
     '''
@@ -276,10 +288,19 @@ def begin_simulation(runtime:float, positions:list, atoms_container:list, box_le
     turn_on_gravity = True
     gravitational_acceleration = -9.8
 
-    print("=== Now starting simulation ===")
-    while t<runtime:
 
-        vp.rate(10000) # puts a limit of x amount of frames per second
+    vp.rate(100) # puts a limit of x amount of frames per second
+
+    # Using multi threading to allow for simultaneous user input and running of 
+    listener_thread = threading.Thread(target=early_stop)
+    listener_thread.start()
+
+    while t<runtime :
+
+        if stop_event.is_set():
+            print("\nSimulation stopped early by user..\n")
+            break
+
 
         # Being responsible for the box boundary conditions, if atom moves out of border, make it appear at the other end.
         positions[positions > box_len]  -= box_len
@@ -302,7 +323,8 @@ def begin_simulation(runtime:float, positions:list, atoms_container:list, box_le
 
         t += dt
 
-    print("=== End of simulation ===\n")    
+    listener_thread.join()
+
 
     return
 

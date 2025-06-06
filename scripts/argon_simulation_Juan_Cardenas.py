@@ -13,7 +13,6 @@ import argparse
 from multiprocessing import Pool
 from functools import partial
 
-from numba import njit, prange
 
 
 from src.lar_simulation.create_objects import *

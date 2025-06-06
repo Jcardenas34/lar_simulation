@@ -3,7 +3,7 @@
 '''
 Description:
 -----------------
-A script that produces a monte carlo simulation of Solid and Liquid Argon
+A script that produces a monte carlo simulation of Solid and Liquid Argon 
 
 How to run:
 ------------
@@ -11,12 +11,14 @@ python scripts/ argon_simulation.py
 
 '''
 
-from src.lar_simulation.create_objects import *
-from src.lar_simulation.metrics import plot_mean_squared_distance_array
 
+from .create_objects import generate_solid_camera, generate_liquid_camera, create_solid, create_liquid, begin_simulation
+# from .metrics import plot_mean_squared_distance_array
+import argparse
 
 
 def main(args) -> None:
+
     '''
     Creates either a lattice of argon molecules that acts as a solid
     or a liquid of n_molecules argon molecules and simulates their movement for
@@ -51,11 +53,10 @@ def main(args) -> None:
     #     print(f"No proper material was specified, choices are {args.material}")
     #     print("Exiting gracefully...")
 
-   
+
     begin_simulation(runtime=runtime, positions=positions, atoms_container=atoms, box_len=box_len, dt=0.001)
 
     sys.exit()
-
 
 if __name__ == '__main__':
 
@@ -68,3 +69,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     main(args)
+
+
+

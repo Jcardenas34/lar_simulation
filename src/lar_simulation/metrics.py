@@ -5,11 +5,7 @@ import vpython as vp
 from vpython import box, sphere, vector, dot, canvas, color           
 import random as rnd
 import matplotlib.pyplot as plt
-import os
 from subprocess import *                  # shell/command line module; Unix only
-import sys
-import imageio
-import argparse
 
 from typing import *
 

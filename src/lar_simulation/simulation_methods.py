@@ -1,7 +1,7 @@
 
 
-from src.lar_simulation.create_objects import *
-from src.lar_simulation.calculations import *
+from .create_objects import *
+from .calculations import *
 
 def simulate_solid(N, runtime, dt, dimension, material, lattice_spacing, box_len):
     t = 0.0  # starting time
