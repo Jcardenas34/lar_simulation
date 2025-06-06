@@ -6,15 +6,8 @@ This code has become a work in progress recently and has undergone major structu
 
 A sample simulation where particles move freely in the liquid state can be run by
 ```
-# Runs a simulation of Argon atoms in a 3D lattice
-<!-- python scripts/argon_simulation_Juan_Cardenas.py solid -d 3 -->
+# Runs a simulation of Argon atoms in a liquid state
 python scripts/simulate.py
-
-<!-- # Runs a simulation of Argon atoms in a 2D lattice -->
-<!-- python scripts/argon_simulation_Juan_Cardenas.py solid -d 2 -->
-
-<!-- # Runs a simulation of Argon atoms in a liquid state -->
-<!-- python scripts/argon_simulation_Juan_Cardenas.py liquid -->
 
 ```
 
