@@ -1,8 +1,26 @@
-FROM python:3.11-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
+# Start with a Miniconda base image
+FROM continuumio/miniconda3
 
-EXPOSE 8000
-CMD ["python", "app.py"]
+# Set a working directory
+WORKDIR /app
+
+# Copy your project files into the container
+COPY . /app
+
+# Copy the environment.yml separately first to leverage Docker caching
+COPY environment.yml .
+
+# Create the environment
+RUN conda env create -f environment.yml
+
+# Make sure the environment is activated in all subsequent layers
+SHELL ["conda", "run", "-n", "lar_simunlation", "/bin/bash", "-c"]
+
+# Install your package (assuming a src layout and pyproject.toml)
+RUN pip install -e .
+
+# Optionally set environment path so it's default
+ENV PATH /opt/conda/envs/lar_sim/bin:$PATH
+
+# Set default command (can be overridden)
+CMD ["conda", "run", "-n", "lar_simulation", "python", "scripts/main.py"]
