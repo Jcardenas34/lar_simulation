@@ -1,6 +1,5 @@
 import argparse
 from lar_simulation import simulate_liquid_argon, simulate_solid_argon
-import sys
 import os
 
 if __name__ == '__main__':

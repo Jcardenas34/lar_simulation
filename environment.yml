@@ -1,0 +1,7 @@
+name: lar_simulation
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - matplotlib
+prefix: /Users/chiral/anaconda3/envs/lar_simulation

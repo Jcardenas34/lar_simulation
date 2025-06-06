@@ -2,17 +2,19 @@
 This repo contains the code base to create a 2 and 3D simulation of solid and liquid argon.
 Specific indicators that measure the properties of the materials such as pair correlation function and mean square distance are in the /images folder.
 
+This code has become a work in progress recently and has undergone major structural as well as coding practice changes.
 
-This code can be run by
+A sample simulation where particles move freely in the liquid state can be run by
 ```
 # Runs a simulation of Argon atoms in a 3D lattice
-python scripts/argon_simulation_Juan_Cardenas.py solid -d 3
+<!-- python scripts/argon_simulation_Juan_Cardenas.py solid -d 3 -->
+python scripts/simulate.py
 
-# Runs a simulation of Argon atoms in a 2D lattice
-python scripts/argon_simulation_Juan_Cardenas.py solid -d 2
+<!-- # Runs a simulation of Argon atoms in a 2D lattice -->
+<!-- python scripts/argon_simulation_Juan_Cardenas.py solid -d 2 -->
 
-# Runs a simulation of Argon atoms in a liquid state
-python scripts/argon_simulation_Juan_Cardenas.py liquid
+<!-- # Runs a simulation of Argon atoms in a liquid state -->
+<!-- python scripts/argon_simulation_Juan_Cardenas.py liquid -->
 
 ```
 
